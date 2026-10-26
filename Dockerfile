@@ -16,7 +16,7 @@ RUN --mount=type=secret,id=proxy_ca \
     pip install --no-cache-dir -r requirements.txt
 RUN groupadd --gid 10001 slides && useradd --uid 10001 --gid slides --create-home slides \
     && mkdir /app/.runtime && chown slides:slides /app/.runtime
-COPY --chown=slides:slides app.py converter.py ./
+COPY --chown=slides:slides app.py converter.py batch.py ./
 COPY --chown=slides:slides static/ ./static/
 USER slides
 EXPOSE 10000

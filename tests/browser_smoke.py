@@ -1,10 +1,11 @@
 """Optional browser check: requires Playwright and system Chromium; start app first."""
+import os
 from playwright.sync_api import sync_playwright
 with sync_playwright() as p:
     b=p.chromium.launch(headless=True,executable_path='/usr/bin/chromium',args=['--no-sandbox'])
     page=b.new_page(viewport={'width':1440,'height':1100},device_scale_factor=1)
     errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
-    page.goto('http://127.0.0.1:8000')
+    page.goto(os.environ.get('SLIDESTRETCH_URL','http://127.0.0.1:8000'))
     page.screenshot(path='artifacts/app-before-upload.png',full_page=True)
     page.locator('#file').set_input_files('artifacts/representative-4x3.pptx')
     page.locator('#submit').click()

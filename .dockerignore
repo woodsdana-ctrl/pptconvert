@@ -3,5 +3,6 @@
 !requirements.txt
 !app.py
 !converter.py
+!batch.py
 !static/
 !static/**

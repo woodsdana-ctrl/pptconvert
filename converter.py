@@ -123,7 +123,7 @@ def write_package(parts, destination):
         for name,data in parts.items():
             z.writestr(name,data)
 
-def render(source, output, width=1200):
+def render(source, output, width=1200, limit=None):
     """Render with an isolated profile; never round-trip the editable output."""
     output=Path(output)
     output.mkdir(parents=True,exist_ok=True)
@@ -148,6 +148,8 @@ def render(source, output, width=1200):
             if len(doc)>150:
                 raise ConversionError('Preview and visual mode support up to 150 slides.')
             for i,page in enumerate(doc):
+                if limit is not None and i>=limit:
+                    break
                 path=output/f'{i+1}.png'
                 page.get_pixmap(matrix=fitz.Matrix(width/page.rect.width,width/page.rect.width),alpha=False).save(path)
                 pages.append(path)
