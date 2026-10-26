@@ -2,6 +2,18 @@
 
 A local web tool and CLI for moving one 4:3 SMART Board `.pptx` to a full-width 16:9 OneScreen presentation. The original is never overwritten. Slide height is unchanged; horizontal positions and dimensions multiply by exactly 4/3, rounded to integer EMUs.
 
+## Run with local Docker
+
+Install and open Docker Desktop, then download this repository and open a terminal in its folder. Run:
+
+```sh
+docker compose up --build
+```
+
+Open **http://localhost:8000** in your browser. Upload your PowerPoint, choose a conversion mode, and download the new file. Python, LibreOffice and fonts run inside the container; you do not install them separately. The first run downloads and builds the image; later runs reuse it.
+
+Stop with **Ctrl+C**. Start it again with `docker compose up`. To remove the stopped container, run `docker compose down`. Files remain on your computer and the service accepts connections only from your computer. Temporary uploads/results stay in the container until it is removed; download the result before removing it. No account, password or hosting is required.
+
 ## Two conversion approaches
 
 | | Editable | Visual match |
